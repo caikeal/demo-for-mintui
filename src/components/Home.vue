@@ -1,17 +1,8 @@
 <template>
     <div class="home">
-        <mt-tab-container :active.sync="finishedType">
-            <mt-tab-container-item :id="5">
-                <span>5</span>  
-            </mt-tab-container-item>
-            <mt-tab-container-item :id="6">
-                <span>6</span>
-            </mt-tab-container-item>
-        </mt-tab-container>
-
-        <div class="btn_wrap">
-            <mt-button type="primary" size="large" @click="nextStep">next</mt-button>
-        </div>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
 
         <div class="go">
             <a v-link="{path: '/tab-list'}">go tab-list!</a>
@@ -20,21 +11,29 @@
 </template>
 
 <script>
-    import { Navbar, TabItem, TabContainer, TabContainerItem, Button } from 'mint-ui'
+    import { Indicator } from 'mint-ui'
 
     export default {
         name: 'zeco-home',
         data () {
             return {
-                finishedType: 5
+                list: []
             }
         },
+        route: {
+            data (transition) {
+                Indicator.open('加载中...')
+                setTimeout(() => {
+                    this.list = ['a', 'b', 'c', 'd', 'e']
+                    Indicator.close()
+                }, 2000)
+            }
+        },
+        beforeDestroy () {
+            Indicator.close()
+        },
         components: {
-            [Navbar.name]: Navbar,
-            [Button.name]: Button,
-            [TabItem.name]: TabItem,
-            [TabContainer.name]: TabContainer,
-            [TabContainerItem.name]: TabContainerItem
+            [Indicator.name]: Indicator
         },
         methods: {
             nextStep () {

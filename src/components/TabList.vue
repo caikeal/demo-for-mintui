@@ -1,18 +1,8 @@
 <template>
     <div class="tab-list">
-        <mt-navbar class="page-part" :selected.sync="selected">
-            <mt-tab-item id="1">我是daddy</mt-tab-item>
-            <mt-tab-item id="2">我是mom</mt-tab-item>
-        </mt-navbar>
-
-        <mt-tab-container :active.sync="selected" swipeable>
-            <mt-tab-container-item id="1">
-                <span>3</span>  
-            </mt-tab-container-item>
-            <mt-tab-container-item id="2">
-                <span>4</span>
-            </mt-tab-container-item>
-        </mt-tab-container>
+        <ul>
+            <li v-for="(index, item) in list">{{index+1}}</li>
+        </ul>
 
         <div class="go">
             <a v-link="{path: '/home'}">go home!</a>
@@ -21,20 +11,29 @@
 </template>
 
 <script>
-    import { Navbar, TabItem, TabContainer, TabContainerItem } from 'mint-ui'
+    import { Indicator } from 'mint-ui'
 
     export default {
         name: 'zeco-tab-list',
         data () {
             return {
-                selected: '1'
+                list: []
             }
         },
+        route: {
+            data (transition) {
+                Indicator.open('加载中...')
+                setTimeout(() => {
+                    this.list = [1, 2, 3, 4, 5]
+                    Indicator.close()
+                }, 2000)
+            }
+        },
+        beforeDestroy () {
+            Indicator.close()
+        },
         components: {
-            [Navbar.name]: Navbar,
-            [TabItem.name]: TabItem,
-            [TabContainer.name]: TabContainer,
-            [TabContainerItem.name]: TabContainerItem
+            [Indicator.name]: Indicator
         }
     }
 </script>

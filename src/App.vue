@@ -14,9 +14,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import 'assets/sass/_normalize.scss';
-@import 'assets/sass/_base.scss';
+<style>
 
 html {
   height: 100%;
@@ -30,7 +28,7 @@ html {
 }
 
 #wrapper a {
-  // color: #666;
-  // text-decoration: none;
+  color: #666;
+  text-decoration: none;
 }
 </style>
