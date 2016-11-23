@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    computed: {
-        visible () {
-            return ['/', '/header', '/search'].indexOf(this.$route.path) < 0
-        }
+  computed: {
+    visible () {
+      return ['/', '/header', '/search'].indexOf(this.$route.path) < 0
     }
+  }
 }
 </script>
 
